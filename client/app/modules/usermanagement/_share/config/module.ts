@@ -11,14 +11,14 @@ function createModule() {
         new MenuItem(
             "User Management", "/Roles", "fa fa-users",
             new MenuItem("Roles", "/Roles", ""),
-            new MenuItem("User Groups", "/Groups", ""),
-            new MenuItem("User Permission", "/Permissions", "")
+            new MenuItem("User Groups", "/Groups", "")
+            // new MenuItem("User Permission", "/Permissions", "")
         )
     );
     module.addRoutes([
         { path: "/roles", name: "Roles", component: Roles, data: { authentication: AuthenticationMode.Require }, useAsDefault: true },
         { path: "/groups", name: "Groups", component: Groups, data: { authentication: AuthenticationMode.Require } },
-        { path: "/permissions", name: "Permissions", component: Permissions, data: { authentication: AuthenticationMode.Require } },
+        // { path: "/permissions", name: "Permissions", component: Permissions, data: { authentication: AuthenticationMode.Require } },
     ]);
     return module;
 }
