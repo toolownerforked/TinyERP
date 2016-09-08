@@ -29,5 +29,24 @@ namespace App.Api.Features.Security
             }
             return response;
         }
+
+        [Route("{itemId}")]
+        [HttpDelete]
+        public IResponseData<string> DeletePermission([FromUri]string itemId)
+        {
+            IResponseData<string> response = new ResponseData<string>();
+            try
+            {
+                IPermissionService perservice = IoC.Container.Resolve<IPermissionService>();
+                perservice.DeletePermission(itemId);
+            }
+            catch (ValidationException ex)
+            {
+
+                response.SetStatus(System.Net.HttpStatusCode.PreconditionFailed);
+                response.SetErrors(ex.Errors);
+            }
+            return response;
+        }
     }
 }
