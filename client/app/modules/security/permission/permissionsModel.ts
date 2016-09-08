@@ -10,7 +10,8 @@ export class PermissionsModel {
                 { field: "name", title: resourceHelper.resolve("security.permissions.grid.name"), index: 0 },
                 { field: "key", title: resourceHelper.resolve("security.permissions.grid.key"), index: 1 },
                 { field: "description", title: resourceHelper.resolve("security.permissions.grid.description"), index: 2 }
-            ]
+            ],
+            enableDelete: true
         };
     }
     public addAction(action: any): void {
