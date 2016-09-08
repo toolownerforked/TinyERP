@@ -6,6 +6,8 @@ using App.Entity.Security;
 using App.Repository.Security;
 using App.Service.Security;
 using System.Collections.Generic;
+using System;
+using App.Common.Validation;
 
 namespace App.Service.Impl.Security
 {
@@ -19,6 +21,26 @@ namespace App.Service.Impl.Security
                 Permission permission = new Permission(request.Name, request.Key, request.Description);
                 permissionRepo.Add(permission);
                 uow.Commit();
+            }
+        }
+
+        public void DeletePermission(string itemId)
+        {
+            ValiateForDeletion(itemId);
+            using (IUnitOfWork uow = new UnitOfWork(new AppDbContext(IOMode.Write)))
+            {
+                IPermissionRepository permissionRepo = IoC.Container.Resolve<IPermissionRepository>(uow);
+                permissionRepo.Delete(itemId);
+                uow.Commit();
+            }
+        }
+
+        private void ValiateForDeletion(string itemId)
+        {
+            Guid id;
+            if (!Guid.TryParse(itemId, out id))
+            {
+                throw new ValidationException("security.deletePermission.invalidId");
             }
         }
 
