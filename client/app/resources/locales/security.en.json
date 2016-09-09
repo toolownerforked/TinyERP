@@ -30,6 +30,12 @@
             "description": "Description"
         }
     },
+    "addPermission": {
+        "pageTitle": "Add Permission",
+        "name": "Name",
+        "key": "Key",
+        "description": "Description"
+    },
     "addOrUpdatePermission":{
         "title":"Add Permission",
         "name":"Name",
