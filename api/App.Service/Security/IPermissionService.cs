@@ -6,7 +6,7 @@ namespace App.Service.Security
     public interface IPermissionService
     {
         IList<PermissionListItem> GetPermissions();
-        void Create(Permission request);
+        Permission Create(Permission request);
         void DeletePermission(string itemId);
     }
 }

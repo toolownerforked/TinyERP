@@ -13,15 +13,17 @@ namespace App.Service.Impl.Security
 {
     public class PermissionService : IPermissionService
     {
-        public void Create(Permission request)
+        public Permission Create(Permission request)
         {
+            Permission permission;
             using (IUnitOfWork uow = new UnitOfWork(new AppDbContext(IOMode.Write)))
             {
                 IPermissionRepository permissionRepo = IoC.Container.Resolve<IPermissionRepository>(uow);
-                Permission permission = new Permission(request.Name, request.Key, request.Description);
+                permission = new Permission(request.Name, request.Key, request.Description);
                 permissionRepo.Add(permission);
                 uow.Commit();
             }
+            return permission;
         }
 
         public void DeletePermission(string itemId)
