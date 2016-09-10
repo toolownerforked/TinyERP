@@ -4,8 +4,10 @@ import {AddPermissionModel} from "./addPermissionModel";
 import {Router} from "angular2/Router";
 import permissionService from "../_share/services/permissionService";
 import {router} from "../_share/config/route";
+import {ValidationDirective} from "../../../common/directive"
 @Component({
-    templateUrl: "app/modules/security/permission/addPermission.html"
+    templateUrl: "app/modules/security/permission/addPermission.html",
+    directives: [ValidationDirective]
 })
 export class AddPermission extends BasePage {
     public model: AddPermissionModel = new AddPermissionModel();
@@ -16,6 +18,7 @@ export class AddPermission extends BasePage {
     }
     public onSaveClicked() {
         let self: AddPermission = this;
+        if (!self.model.validate()) { return; }
         permissionService.create(this.model).then(function () {
             self.router.navigate([router.permission.permissions.name]);
         });

@@ -7,13 +7,13 @@
             <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{i18n.security.addPermission.name}}</label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input [(ngModel)]=model.name type="text" class="form-control col-md-7 col-xs-12" />
+                    <input [(ngModel)]=model.name [validation]="['security.addPermission.nameIsRequired', 'security.addPermission.nameIsLessThan255Characters', 'security.addPermission.nameIsUnique', 'security.addPermission.nameContainsOnlyLettersAndHyphenMinusCharacter']" type="text" class="form-control col-md-7 col-xs-12" />
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="key">{{i18n.security.addPermission.key}}</label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input [(ngModel)]=model.key type="text" class="form-control col-md-7 col-xs-12" />
+                    <input [(ngModel)]=model.key [validation]="['security.addPermission.keyIsRequired', 'security.addPermission.keyIsLessThan255Characters', 'security.addPermission.keyIsUnique','security.addPermission.keyContainsOnlyLettersAndHyphenMinusCharacter']" type="text" class="form-control col-md-7 col-xs-12" />
                 </div>
             </div>
             <div class="form-group">

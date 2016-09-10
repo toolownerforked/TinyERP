@@ -34,7 +34,15 @@
         "pageTitle": "Add Permission",
         "name": "Name",
         "key": "Key",
-        "description": "Description"
+        "description": "Description",
+        "nameIsRequired": "You can't leave this empty.",
+        "keyIsRequired": "You can't leave this empty.",
+        "nameIsLessThan255Characters": "Please use less than 255 characters.",
+        "keyIsLessThan255Characters": "Please use less than 255 characters.",
+        "nameIsUnique": "That name is taken. Try another.",
+        "keyIsUnique": "That key is taken. Try another.",
+        "nameContainsOnlyLettersAndHyphenMinusCharacter": "Please use only letters (a-z, A-Z) and hyphen-minus.",
+        "keyContainsOnlyLettersAndHyphenMinusCharacter": "Please use only letters (a-z, A-Z) and hyphen-minus."
     },
     "addOrUpdatePermission":{
         "title":"Add Permission",
