@@ -3,6 +3,10 @@ export const router = {
         permissions: {
             path: "/permissions",
             name: "Permissions"
+        },
+        addPermission: {
+            path: "/addPermission",
+            name: "Add Permission"
         }
     }
 };

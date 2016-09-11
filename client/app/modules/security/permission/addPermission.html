@@ -1,0 +1,33 @@
+<div class="x_panel">
+    <h3 class="x_title title_right">
+        {{i18n.security.addPermission.pageTitle}}
+    </h3>
+    <div class="page-content x_content">
+        <form data-parsley-validate class="form-horizontal form-label-left">
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">{{i18n.security.addPermission.name}}</label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input [(ngModel)]=model.name [validation]="['security.addPermission.nameIsRequired', 'security.addPermission.nameIsLessThan255Characters', 'security.addPermission.nameIsUnique', 'security.addPermission.nameContainsOnlyLettersAndHyphenMinusCharacter']" type="text" class="form-control col-md-7 col-xs-12" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="key">{{i18n.security.addPermission.key}}</label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input [(ngModel)]=model.key [validation]="['security.addPermission.keyIsRequired', 'security.addPermission.keyIsLessThan255Characters', 'security.addPermission.keyIsUnique','security.addPermission.keyContainsOnlyLettersAndHyphenMinusCharacter']" type="text" class="form-control col-md-7 col-xs-12" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">{{i18n.security.addPermission.description}}</label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <textarea [(ngModel)]=model.description class="form-control col-md-7 col-xs-12"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                    <button id="save" (click)=onSaveClicked() type="button" class="btn btn-primary">{{i18n.common.form.save}}</button>
+                    <button id="cancel" (click)=onCancelClicked() type="button" class="btn btn-default">{{i18n.common.form.cancel}}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

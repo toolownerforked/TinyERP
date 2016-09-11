@@ -8,19 +8,62 @@ using App.Service.Security;
 using System.Collections.Generic;
 using System;
 using App.Common.Validation;
+using System.Text.RegularExpressions;
 
 namespace App.Service.Impl.Security
 {
     public class PermissionService : IPermissionService
     {
-        public void Create(Permission request)
+        public Permission Create(Permission request)
         {
+            ValiateForCreation(request);
+            Permission permission;
             using (IUnitOfWork uow = new UnitOfWork(new AppDbContext(IOMode.Write)))
             {
                 IPermissionRepository permissionRepo = IoC.Container.Resolve<IPermissionRepository>(uow);
-                Permission permission = new Permission(request.Name, request.Key, request.Description);
+                permission = new Permission(request.Name, request.Key, request.Description);
                 permissionRepo.Add(permission);
                 uow.Commit();
+            }
+            return permission;
+        }
+
+        private void ValiateForCreation(Permission request)
+        {
+            if (string.IsNullOrWhiteSpace(request.Name))
+            {
+                throw new ValidationException("security.addPermission.nameIsRequired");
+            }
+            if (string.IsNullOrWhiteSpace(request.Key))
+            {
+                throw new ValidationException("security.addPermission.keyIsRequired");
+            }
+            if (request.Name.Length > 255)
+            {
+                throw new ValidationException("security.addPermission.nameIsLessThan255Characters");
+            }
+            if (request.Key.Length > 255)
+            {
+                throw new ValidationException("security.addPermission.keyIsLessThan255Characters");
+            }
+            string namePattern = "^[a-zA-Z-]+$";
+            if (!Regex.IsMatch(request.Name, namePattern))
+            {
+                throw new ValidationException("security.addPermission.nameContainsOnlyLettersAndHyphenMinusCharacter");
+            }
+            string keyPattern = "^[a-zA-Z-]+$";
+            if (!Regex.IsMatch(request.Key, keyPattern))
+            {
+                throw new ValidationException("security.addPermission.keyContainsOnlyLettersAndHyphenMinusCharacter");
+            }
+            IPermissionRepository permissionRepo = IoC.Container.Resolve<IPermissionRepository>();
+            if (permissionRepo.GetByName(request.Name) != null)
+            {
+                throw new ValidationException("security.addPermission.nameIsUnique");
+            }
+            if (permissionRepo.GetByKey(request.Key) != null)
+            {
+                throw new ValidationException("security.addPermission.keyIsUnique");
             }
         }
 
