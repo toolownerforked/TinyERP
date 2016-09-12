@@ -30,6 +30,20 @@
             "description": "Description"
         }
     },
+    "addPermission": {
+        "pageTitle": "Add Permission",
+        "name": "Name",
+        "key": "Key",
+        "description": "Description",
+        "nameIsRequired": "You can't leave this empty.",
+        "nameIsTooLong": "Please use less than 255 characters.",
+        "nameMatchesThisPattern": "Please use only letters (a-z, A-Z) and hyphen-minus.",
+        "nameIsUnique": "That name is taken. Try another.",
+        "keyIsRequired": "You can't leave this empty.",
+        "keyIsTooLong": "Please use less than 255 characters.",
+        "keyMatchesThisPattern": "Please use only letters (a-z, A-Z) and hyphen-minus.",
+        "keyIsUnique": "That key is taken. Try another."
+    },
     "addOrUpdatePermission":{
         "title":"Add Permission",
         "name":"Name",

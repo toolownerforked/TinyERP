@@ -1,8 +1,10 @@
-export const router = {
+export const routeConfig = {
     permission: {
         permissions: {
-            path: "/permissions",
-            name: "Permissions"
+            path: "/permissions", name: "Permissions"
+        },
+        addPermission: {
+            path: "/addPermission", name: "Add Permission"
         }
     }
 };
