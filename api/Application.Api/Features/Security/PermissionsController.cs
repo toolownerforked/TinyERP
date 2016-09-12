@@ -1,6 +1,7 @@
 ﻿using App.Common.DI;
 using App.Common.Http;
 using App.Common.Validation;
+using App.Entity.Security;
 using App.Service.Security;
 using System.Collections.Generic;
 using System.Net;
@@ -44,6 +45,24 @@ namespace App.Api.Features.Security
             {
 
                 response.SetStatus(System.Net.HttpStatusCode.PreconditionFailed);
+                response.SetErrors(ex.Errors);
+            }
+            return response;
+        }
+
+        [Route("")]
+        [HttpPost]
+        public IResponseData<string> CreatePermission([FromBody]CreatePermissionRequest request)
+        {
+            IResponseData<string> response = new ResponseData<string>();
+            try
+            {
+                IPermissionService perService = IoC.Container.Resolve<IPermissionService>();
+                perService.Create(request);
+            }
+            catch (ValidationException ex)
+            {
+                response.SetStatus(HttpStatusCode.PreconditionFailed);
                 response.SetErrors(ex.Errors);
             }
             return response;
