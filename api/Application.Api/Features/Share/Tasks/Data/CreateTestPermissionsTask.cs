@@ -15,8 +15,16 @@ namespace App.Api.Features.Share.Tasks.Data
 
         public override void Execute(TaskArgument<HttpApplication> context)
         {
-            IPermissionService permissionService = IoC.Container.Resolve<IPermissionService>();
-            permissionService.Create(new Entity.Security.Permission("p01", "Add New File", "Add a file to folder"));
+            try
+            {
+                IPermissionService permissionService = IoC.Container.Resolve<IPermissionService>();
+                permissionService.Create(new CreatePermissionRequest("AddFile", "addFile", "Add a file to folder"));
+            }
+            catch (System.Exception)
+            {
+
+            }
+
         }
     }
 }
