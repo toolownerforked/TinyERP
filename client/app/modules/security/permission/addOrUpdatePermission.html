@@ -1,0 +1,37 @@
+<div class="x_panel">
+    <h3 *ngIf="!selectedPerItemId" class="x_title title_right">
+        {{i18n.security.addOrUpdatePermission.pageTitle.add}}
+    </h3>
+    <h3 *ngIf="selectedPerItemId" class="x_title title_right">
+        {{i18n.security.addOrUpdatePermission.pageTitle.update}}
+    </h3>    
+    <div class="page-content x_content">
+        <form data-parsley-validate class="form-horizontal form-label-left">
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">{{i18n.security.addOrUpdatePermission.name}}</label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input [(ngModel)]=model.name [validation]="['security.addOrUpdatePermission.nameIsRequired', 'security.addOrUpdatePermission.nameIsTooLong', 'security.addOrUpdatePermission.nameMatchesThisPattern', 'security.addOrUpdatePermission.nameIsUnique']" type="text" class="form-control col-md-7 col-xs-12" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">{{i18n.security.addOrUpdatePermission.key}}</label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <input [(ngModel)]=model.key [validation]="['security.addOrUpdatePermission.keyIsRequired', 'security.addOrUpdatePermission.keyIsTooLong', 'security.addOrUpdatePermission.keyMatchesThisPattern','security.addOrUpdatePermission.keyIsUnique']" type="text" class="form-control col-md-7 col-xs-12" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">{{i18n.security.addOrUpdatePermission.description}}</label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <textarea [(ngModel)]=model.description class="form-control col-md-7 col-xs-12"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                    <button *ngIf="!selectedPerItemId" id="save" (click)=onSaveClicked() type="button" class="btn btn-primary">{{i18n.common.form.save}}</button>
+                    <button *ngIf="selectedPerItemId" id="edit" (click)=onEditClicked() type="button" class="btn btn-primary">{{i18n.common.form.edit}}</button>
+                    <button id="cancel" (click)=onCancelClicked() type="button" class="btn btn-default">{{i18n.common.form.cancel}}</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

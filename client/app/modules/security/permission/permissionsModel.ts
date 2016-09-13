@@ -11,7 +11,8 @@ export class PermissionsModel {
                 { field: "key", title: resourceHelper.resolve("security.permissions.grid.key"), index: 1 },
                 { field: "description", title: resourceHelper.resolve("security.permissions.grid.description"), index: 2 }
             ],
-            enableDelete: true
+            enableDelete: true,
+            enableEdit: true
         };
     }
     public addAction(action: any): void {

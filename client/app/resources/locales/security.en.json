@@ -30,8 +30,11 @@
             "description": "Description"
         }
     },
-    "addPermission": {
-        "pageTitle": "Add Permission",
+    "addOrUpdatePermission": {
+        "pageTitle": {
+            "add": "Add Permission",
+            "update": "Edit Permission"
+        },
         "name": "Name",
         "key": "Key",
         "description": "Description",
@@ -43,21 +46,6 @@
         "keyIsTooLong": "Please use less than 255 characters.",
         "keyMatchesThisPattern": "Please use only letters (a-z, A-Z) and hyphen-minus.",
         "keyIsUnique": "That key is taken. Try another."
-    },
-    "addOrUpdatePermission":{
-        "title":"Add Permission",
-        "name":"Name",
-        "inputName":"Please input name of Permission",
-        "desc":"Description",
-        "inputDesc":"Please input description for Permission",
-        "key":"Key",
-        "inputKey":"Please input key for Permission",
-        "validation":{
-            "nameIsRequire":"Please input name of Permission",
-            "nameAlreadyExist":"This name is already existed. Please input another name",
-            "keyIsRequire":"Please input key of Permission",
-            "keyAlreadyExist":"This key is already existed. Please input another key."
-        }
     },
     "userGroups":{
         "title":"UserGroups",

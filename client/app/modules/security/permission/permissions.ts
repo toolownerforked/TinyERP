@@ -36,4 +36,7 @@ export class Permissions extends BasePage {
             self.loadPermissions();
         })
     }
+    public onPermissionEditClicked(perItem: any) {
+        this.router.navigate([routeConfig.permission.updatePermission.name, { id: perItem.item.id }]);
+    }
 } 

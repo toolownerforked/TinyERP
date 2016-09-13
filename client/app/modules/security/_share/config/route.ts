@@ -5,6 +5,9 @@ export const routeConfig = {
         },
         addPermission: {
             path: "/addPermission", name: "Add Permission"
+        },
+        updatePermission: {
+            path: "/editPermission/:id", name: "Edit Permission"
         }
     }
 };
