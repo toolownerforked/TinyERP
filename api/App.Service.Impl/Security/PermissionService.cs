@@ -15,6 +15,78 @@ namespace App.Service.Impl.Security
 {
     public class PermissionService : IPermissionService
     {
+        public UpdatePermissionResponse Update(string itemId, UpdatePermissionRequest request)
+        {
+            ValiateForUpdate(itemId, request);
+            Permission permission;
+            using (IUnitOfWork uow = new UnitOfWork(new AppDbContext(IOMode.Write)))
+            {
+                IPermissionRepository permissionRepo = IoC.Container.Resolve<IPermissionRepository>(uow);
+                permission = permissionRepo.GetById(itemId);
+                if (permission != null)
+                {
+                    permission.Name = request.Name;
+                    permission.Key = request.Key;
+                    permission.Description = request.Description;
+                    permissionRepo.Update(permission);
+                    uow.Commit();
+                }
+
+            }
+            IPermissionRepository perRepo = IoC.Container.Resolve<IPermissionRepository>();
+            return perRepo.GetById<UpdatePermissionResponse>(itemId);
+        }
+
+        private void ValiateForUpdate(string itemId, UpdatePermissionRequest request)
+        {
+            IPermissionRepository permissionRepo = IoC.Container.Resolve<IPermissionRepository>();
+            Permission oldItem = permissionRepo.GetById(itemId);
+            if (string.IsNullOrWhiteSpace(request.Name))
+            {
+                throw new ValidationException("security.addOrUpdatePermission.nameIsRequired");
+            }
+            if (request.Name.Length > ValidationConfig.nameLength)
+            {
+                throw new ValidationException("security.addOrUpdatePermission.nameIsTooLong");
+            }
+            if (!Regex.IsMatch(request.Name, ValidationConfig.namePattern))
+            {
+                throw new ValidationException("security.addOrUpdatePermission.nameMatchesThisPattern");
+            }
+            if (oldItem.Name != request.Name)
+            {
+                if (permissionRepo.GetByName(request.Name) != null)
+                {
+                    throw new ValidationException("security.addOrUpdatePermission.nameIsUnique");
+                }
+            }
+            if (string.IsNullOrWhiteSpace(request.Key))
+            {
+                throw new ValidationException("security.addOrUpdatePermission.keyIsRequired");
+            }
+            if (request.Key.Length > ValidationConfig.keyLength)
+            {
+                throw new ValidationException("security.addOrUpdatePermission.keyIsTooLong");
+            }
+            if (!Regex.IsMatch(request.Key, ValidationConfig.keyPattern))
+            {
+                throw new ValidationException("security.addOrUpdatePermission.keyMatchesThisPattern");
+            }
+            if (oldItem.Key != request.Key)
+            {
+                if (permissionRepo.GetByKey(request.Key) != null)
+                {
+                    throw new ValidationException("security.addOrUpdatePermission.keyIsUnique");
+                }
+            }
+
+        }
+
+        public GetPermissionResponse GetById(string itemId)
+        {
+            IPermissionRepository permissionRepo = IoC.Container.Resolve<IPermissionRepository>();
+            return permissionRepo.GetById<GetPermissionResponse>(itemId);
+        }
         public Permission Create(CreatePermissionRequest request)
         {
             ValiateForCreation(request);
@@ -34,35 +106,35 @@ namespace App.Service.Impl.Security
             IPermissionRepository permissionRepo = IoC.Container.Resolve<IPermissionRepository>();
             if (string.IsNullOrWhiteSpace(request.Name))
             {
-                throw new ValidationException("security.addPermission.nameIsRequired");
+                throw new ValidationException("security.addOrUpdatePermission.nameIsRequired");
             }
             if (request.Name.Length > ValidationConfig.nameLength)
             {
-                throw new ValidationException("security.addPermission.nameIsTooLong");
+                throw new ValidationException("security.addOrUpdatePermission.nameIsTooLong");
             }
             if (!Regex.IsMatch(request.Name, ValidationConfig.namePattern))
             {
-                throw new ValidationException("security.addPermission.nameMatchesThisPattern");
+                throw new ValidationException("security.addOrUpdatePermission.nameMatchesThisPattern");
             }
             if (permissionRepo.GetByName(request.Name) != null)
             {
-                throw new ValidationException("security.addPermission.nameIsUnique");
+                throw new ValidationException("security.addOrUpdatePermission.nameIsUnique");
             }
             if (string.IsNullOrWhiteSpace(request.Key))
             {
-                throw new ValidationException("security.addPermission.keyIsRequired");
+                throw new ValidationException("security.addOrUpdatePermission.keyIsRequired");
             }
             if (request.Key.Length > ValidationConfig.keyLength)
             {
-                throw new ValidationException("security.addPermission.keyIsTooLong");
+                throw new ValidationException("security.addOrUpdatePermission.keyIsTooLong");
             }
             if (!Regex.IsMatch(request.Key, ValidationConfig.keyPattern))
             {
-                throw new ValidationException("security.addPermission.keyMatchesThisPattern");
+                throw new ValidationException("security.addOrUpdatePermission.keyMatchesThisPattern");
             }
             if (permissionRepo.GetByKey(request.Key) != null)
             {
-                throw new ValidationException("security.addPermission.keyIsUnique");
+                throw new ValidationException("security.addOrUpdatePermission.keyIsUnique");
             }
         }
 

@@ -61,8 +61,11 @@
     <Compile Include="Registration\User\UserSignInResponse.cs" />
     <Compile Include="Security\Config\ValidationConfig.cs" />
     <Compile Include="Security\CreatePermissionRequest.cs" />
+    <Compile Include="Security\GetPermissionResponse.cs" />
     <Compile Include="Security\IPermissionService.cs" />
     <Compile Include="Security\PermissionListItem.cs" />
+    <Compile Include="Security\UpdatePermissionRequest.cs" />
+    <Compile Include="Security\UpdatePermissionResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\App.Entity\App.Entity.csproj">
