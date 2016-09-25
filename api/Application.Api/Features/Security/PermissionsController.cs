@@ -88,13 +88,14 @@ namespace App.Api.Features.Security
 
         [Route("{itemId}")]
         [HttpPut]
-        public IResponseData<UpdatePermissionResponse> UpdatePermission([FromUri]string itemId, [FromBody]UpdatePermissionRequest request)
+        public IResponseData<GetPermissionResponse> UpdatePermission([FromUri]string itemId, [FromBody]UpdatePermissionRequest request)
         {
-            IResponseData<UpdatePermissionResponse> response = new ResponseData<UpdatePermissionResponse>();
+            IResponseData<GetPermissionResponse> response = new ResponseData<GetPermissionResponse>();
             try
             {
                 IPermissionService perService = IoC.Container.Resolve<IPermissionService>();
-                UpdatePermissionResponse item = perService.Update(itemId, request);
+                perService.Update(itemId, request);
+                GetPermissionResponse item = perService.GetById(itemId);
                 response.SetData(item);
             }
             catch (ValidationException ex)

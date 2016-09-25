@@ -9,6 +9,6 @@ namespace App.Service.Security
         Permission Create(CreatePermissionRequest request);
         void DeletePermission(string itemId);
         GetPermissionResponse GetById(string itemId);
-        UpdatePermissionResponse Update(string itemId, UpdatePermissionRequest request);
+        void Update(string itemId, UpdatePermissionRequest request);
     }
 }

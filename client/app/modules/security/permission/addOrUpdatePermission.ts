@@ -13,6 +13,7 @@ export class AddOrUpdatePermission extends BasePage {
     public model: AddOrUpdatePermissionModel = new AddOrUpdatePermissionModel();
     public router: Router;
     public selectedPerItemId: any;
+
     constructor(router: Router, routeParams: RouteParams) {
         super();
         this.router = router;
@@ -26,6 +27,7 @@ export class AddOrUpdatePermission extends BasePage {
             });
         }
     }
+
     public onSaveClicked() {
         let self: AddOrUpdatePermission = this;
         if (!self.model.validate()) { return; }
@@ -33,9 +35,11 @@ export class AddOrUpdatePermission extends BasePage {
             self.router.navigate([routeConfig.permission.permissions.name]);
         });
     }
+
     public onCancelClicked() {
         this.router.navigate([routeConfig.permission.permissions.name]);
     }
+    
     public onEditClicked() {
         let self: AddOrUpdatePermission = this;
         if (!self.model.validate()) { return; }

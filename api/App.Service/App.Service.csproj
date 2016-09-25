@@ -65,7 +65,6 @@
     <Compile Include="Security\IPermissionService.cs" />
     <Compile Include="Security\PermissionListItem.cs" />
     <Compile Include="Security\UpdatePermissionRequest.cs" />
-    <Compile Include="Security\UpdatePermissionResponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\App.Entity\App.Entity.csproj">

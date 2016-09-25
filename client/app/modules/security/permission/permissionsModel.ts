@@ -3,6 +3,7 @@ export class PermissionsModel {
     public actions: Array<any> = [];
     public options: any = {};
     public eventKey = "permissions_ondataloaded";
+
     constructor(resourceHelper: any) {
         this.options = {
             data: [],
@@ -15,9 +16,11 @@ export class PermissionsModel {
             enableEdit: true
         };
     }
+
     public addAction(action: any): void {
         this.actions.push(action);
     }
+    
     public import(items: Array<any>) {
         let eventManager = window.ioc.resolve("IEventManager");
         eventManager.publish(this.eventKey, items);

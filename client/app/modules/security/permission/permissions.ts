@@ -13,6 +13,7 @@ import {routeConfig} from "../_share/config/route";
 export class Permissions extends BasePage {
     public model: PermissionsModel;
     public router: Router;
+
     constructor(router: Router) {
         super();
         let self: Permissions = this;
@@ -21,21 +22,25 @@ export class Permissions extends BasePage {
         this.model.addAction(new PageAction("btnAddPermission", "security.permissions.addPermission", () => self.onAddPermissionClicked()));
         this.loadPermissions();
     }
+
     private loadPermissions() {
         let self: Permissions = this;
         permissionService.getPermissions().then(function (perItems: Array<any>) {
             self.model.import(perItems);
         })
     }
+
     private onAddPermissionClicked() {
         this.router.navigate([routeConfig.permission.addPermission.name]);
     }
+
     public onPermissionDeleteClicked(perItem: any) {
         let self: Permissions = this;
         permissionService.delete(perItem.item.id).then(function () {
             self.loadPermissions();
         })
     }
+    
     public onPermissionEditClicked(perItem: any) {
         this.router.navigate([routeConfig.permission.updatePermission.name, { id: perItem.item.id }]);
     }

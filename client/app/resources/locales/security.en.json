@@ -41,11 +41,11 @@
         "nameIsRequired": "You can't leave this empty.",
         "nameIsTooLong": "Please use less than 255 characters.",
         "nameMatchesThisPattern": "Please use only letters (a-z, A-Z) and hyphen-minus.",
-        "nameIsUnique": "That name is taken. Try another.",
+        "nameIsTaken": "That name is taken. Try another.",
         "keyIsRequired": "You can't leave this empty.",
         "keyIsTooLong": "Please use less than 255 characters.",
         "keyMatchesThisPattern": "Please use only letters (a-z, A-Z) and hyphen-minus.",
-        "keyIsUnique": "That key is taken. Try another."
+        "keyIsTaken": "That key is taken. Try another."
     },
     "userGroups":{
         "title":"UserGroups",

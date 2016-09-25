@@ -15,32 +15,29 @@ namespace App.Service.Impl.Security
 {
     public class PermissionService : IPermissionService
     {
-        public UpdatePermissionResponse Update(string itemId, UpdatePermissionRequest request)
+        public void Update(string itemId, UpdatePermissionRequest request)
         {
             ValiateForUpdate(itemId, request);
-            Permission permission;
             using (IUnitOfWork uow = new UnitOfWork(new AppDbContext(IOMode.Write)))
             {
                 IPermissionRepository permissionRepo = IoC.Container.Resolve<IPermissionRepository>(uow);
-                permission = permissionRepo.GetById(itemId);
-                if (permission != null)
-                {
-                    permission.Name = request.Name;
-                    permission.Key = request.Key;
-                    permission.Description = request.Description;
-                    permissionRepo.Update(permission);
-                    uow.Commit();
-                }
-
+                Permission permission = permissionRepo.GetById(itemId);
+                permission.Name = request.Name;
+                permission.Key = request.Key;
+                permission.Description = request.Description;
+                permissionRepo.Update(permission);
+                uow.Commit();
             }
-            IPermissionRepository perRepo = IoC.Container.Resolve<IPermissionRepository>();
-            return perRepo.GetById<UpdatePermissionResponse>(itemId);
         }
 
         private void ValiateForUpdate(string itemId, UpdatePermissionRequest request)
         {
             IPermissionRepository permissionRepo = IoC.Container.Resolve<IPermissionRepository>();
             Permission oldItem = permissionRepo.GetById(itemId);
+            if (oldItem == null)
+            {
+                throw new ValidationException("security.addOrUpdatePermission.itemIsNotExist");
+            }
             if (string.IsNullOrWhiteSpace(request.Name))
             {
                 throw new ValidationException("security.addOrUpdatePermission.nameIsRequired");
@@ -57,7 +54,7 @@ namespace App.Service.Impl.Security
             {
                 if (permissionRepo.GetByName(request.Name) != null)
                 {
-                    throw new ValidationException("security.addOrUpdatePermission.nameIsUnique");
+                    throw new ValidationException("security.addOrUpdatePermission.nameIsTaken");
                 }
             }
             if (string.IsNullOrWhiteSpace(request.Key))
@@ -76,7 +73,7 @@ namespace App.Service.Impl.Security
             {
                 if (permissionRepo.GetByKey(request.Key) != null)
                 {
-                    throw new ValidationException("security.addOrUpdatePermission.keyIsUnique");
+                    throw new ValidationException("security.addOrUpdatePermission.keyIsTaken");
                 }
             }
 
@@ -118,7 +115,7 @@ namespace App.Service.Impl.Security
             }
             if (permissionRepo.GetByName(request.Name) != null)
             {
-                throw new ValidationException("security.addOrUpdatePermission.nameIsUnique");
+                throw new ValidationException("security.addOrUpdatePermission.nameIsTaken");
             }
             if (string.IsNullOrWhiteSpace(request.Key))
             {
@@ -134,7 +131,7 @@ namespace App.Service.Impl.Security
             }
             if (permissionRepo.GetByKey(request.Key) != null)
             {
-                throw new ValidationException("security.addOrUpdatePermission.keyIsUnique");
+                throw new ValidationException("security.addOrUpdatePermission.keyIsTaken");
             }
         }
 

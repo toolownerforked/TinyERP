@@ -10,13 +10,13 @@
             <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">{{i18n.security.addOrUpdatePermission.name}}</label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input [(ngModel)]=model.name [validation]="['security.addOrUpdatePermission.nameIsRequired', 'security.addOrUpdatePermission.nameIsTooLong', 'security.addOrUpdatePermission.nameMatchesThisPattern', 'security.addOrUpdatePermission.nameIsUnique']" type="text" class="form-control col-md-7 col-xs-12" />
+                    <input [(ngModel)]=model.name [validation]="['security.addOrUpdatePermission.nameIsRequired', 'security.addOrUpdatePermission.nameIsTooLong', 'security.addOrUpdatePermission.nameMatchesThisPattern', 'security.addOrUpdatePermission.nameIsTaken']" type="text" class="form-control col-md-7 col-xs-12" />
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12">{{i18n.security.addOrUpdatePermission.key}}</label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input [(ngModel)]=model.key [validation]="['security.addOrUpdatePermission.keyIsRequired', 'security.addOrUpdatePermission.keyIsTooLong', 'security.addOrUpdatePermission.keyMatchesThisPattern','security.addOrUpdatePermission.keyIsUnique']" type="text" class="form-control col-md-7 col-xs-12" />
+                    <input [(ngModel)]=model.key [validation]="['security.addOrUpdatePermission.keyIsRequired', 'security.addOrUpdatePermission.keyIsTooLong', 'security.addOrUpdatePermission.keyMatchesThisPattern','security.addOrUpdatePermission.keyIsTaken']" type="text" class="form-control col-md-7 col-xs-12" />
                 </div>
             </div>
             <div class="form-group">
