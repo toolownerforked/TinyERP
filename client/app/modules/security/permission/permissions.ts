@@ -1,8 +1,8 @@
 import {Component} from "angular2/core";
 import {BasePage} from "../../../common/models/ui";
-import {PageActions, Grid} from "../../../common/directive"
+import {PageActions, Grid} from "../../../common/directive";
 import {PermissionsModel} from "./permissionsModel";
-import {PageAction} from "../../../common/models/ui"
+import {PageAction} from "../../../common/models/ui";
 import permissionService from "../_share/services/permissionService";
 import {Router} from "angular2/Router";
 import {routeConfig} from "../_share/config/route";
@@ -27,7 +27,7 @@ export class Permissions extends BasePage {
         let self: Permissions = this;
         permissionService.getPermissions().then(function (perItems: Array<any>) {
             self.model.import(perItems);
-        })
+        });
     }
 
     private onAddPermissionClicked() {
@@ -38,9 +38,9 @@ export class Permissions extends BasePage {
         let self: Permissions = this;
         permissionService.delete(perItem.item.id).then(function () {
             self.loadPermissions();
-        })
+        });
     }
-    
+
     public onPermissionEditClicked(perItem: any) {
         this.router.navigate([routeConfig.permission.updatePermission.name, { id: perItem.item.id }]);
     }

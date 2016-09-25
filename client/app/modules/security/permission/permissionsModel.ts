@@ -20,7 +20,7 @@ export class PermissionsModel {
     public addAction(action: any): void {
         this.actions.push(action);
     }
-    
+
     public import(items: Array<any>) {
         let eventManager = window.ioc.resolve("IEventManager");
         eventManager.publish(this.eventKey, items);

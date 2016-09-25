@@ -39,7 +39,7 @@ export class AddOrUpdatePermission extends BasePage {
     public onCancelClicked() {
         this.router.navigate([routeConfig.permission.permissions.name]);
     }
-    
+
     public onEditClicked() {
         let self: AddOrUpdatePermission = this;
         if (!self.model.validate()) { return; }
