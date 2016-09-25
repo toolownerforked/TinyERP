@@ -1,7 +1,6 @@
 ﻿using App.Common.DI;
 using App.Common.Http;
 using App.Common.Validation;
-using App.Entity.Security;
 using App.Service.Security;
 using System.Collections.Generic;
 using System.Net;
@@ -22,6 +21,25 @@ namespace App.Api.Features.Security
                 IPermissionService permissionService = IoC.Container.Resolve<IPermissionService>();
                 IList<PermissionListItem> items = permissionService.GetPermissions();
                 response.SetData(items);
+            }
+            catch (ValidationException ex)
+            {
+                response.SetStatus(HttpStatusCode.PreconditionFailed);
+                response.SetErrors(ex.Errors);
+            }
+            return response;
+        }
+
+        [Route("{itemId}")]
+        [HttpGet]
+        public IResponseData<GetPermissionResponse> GetById([FromUri]string itemId)
+        {
+            IResponseData<GetPermissionResponse> response = new ResponseData<GetPermissionResponse>();
+            try
+            {
+                IPermissionService perService = IoC.Container.Resolve<IPermissionService>();
+                GetPermissionResponse item = perService.GetById(itemId);
+                response.SetData(item);
             }
             catch (ValidationException ex)
             {
@@ -59,6 +77,26 @@ namespace App.Api.Features.Security
             {
                 IPermissionService perService = IoC.Container.Resolve<IPermissionService>();
                 perService.Create(request);
+            }
+            catch (ValidationException ex)
+            {
+                response.SetStatus(HttpStatusCode.PreconditionFailed);
+                response.SetErrors(ex.Errors);
+            }
+            return response;
+        }
+
+        [Route("{itemId}")]
+        [HttpPut]
+        public IResponseData<GetPermissionResponse> UpdatePermission([FromUri]string itemId, [FromBody]UpdatePermissionRequest request)
+        {
+            IResponseData<GetPermissionResponse> response = new ResponseData<GetPermissionResponse>();
+            try
+            {
+                IPermissionService perService = IoC.Container.Resolve<IPermissionService>();
+                perService.Update(itemId, request);
+                GetPermissionResponse item = perService.GetById(itemId);
+                response.SetData(item);
             }
             catch (ValidationException ex)
             {

@@ -1,6 +1,6 @@
 export const validationConfig = {
     permission: {
-        addPermission: {
+        addOrUpdatePermission: {
             name: {
                 length: 255,
                 pattern: "^[a-zA-Z-]+$"
